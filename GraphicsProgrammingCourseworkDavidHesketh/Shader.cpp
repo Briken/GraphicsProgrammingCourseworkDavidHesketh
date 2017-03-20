@@ -13,10 +13,13 @@ Shader::Shader(const std::string& filename)
 		glAttachShader(m_Program, m_Shaders[i]);
 	}
 	glBindAttribLocation(m_Program, 0, "position");
+	glBindAttribLocation(m_Program, 1, "texCoord");
 	glLinkProgram(m_Program);
 	CheckShaderError(m_Program, GL_LINK_STATUS, true, "Error: Shader program link failed");
 	glValidateProgram(m_Program);
 	CheckShaderError(m_Program, GL_VALIDATE_STATUS, true, "Error: shader program not valid");
+
+	uniforms[TRANSFORM_U] = glGetUniformLocation(program, "transform");
 }
 void Shader::Bind()
 {
@@ -80,4 +83,30 @@ Shader::~Shader()
 		glDeleteShader(m_Shaders[i]);
 	}
 	glDeleteProgram(m_Program);
+}
+
+void Shader::Update(const Transform& transform, const Camera& camera)
+{
+	glm::mat4 mvp = camera.GetViewProjection() * transform.GetModel();
+	glUniformMatrix4fv(uniforms[TRANSFORM_U], 1, GLU_FALSE, &mvp[0][0]);
+}
+
+GLuint Shader::CreateShader(const std::string& text, unsigned int type)
+{
+	GLuint shader = glCreateShader(type); //create shader based on specified type
+
+	if (shader == 0) //if == 0 shader no created
+		std::cerr << "Error type creation failed " << type << std::endl;
+
+	const GLchar* stringSource[1]; //convert strings into list of c-strings
+	stringSource[0] = text.c_str();
+	GLint lengths[1];
+	lengths[0] = text.length();
+
+	glShaderSource(shader, 1, stringSource, lengths); //send source code to opengl
+	glCompileShader(shader); //get open gl to compile shader code
+
+	CheckShaderError(shader, GL_COMPILE_STATUS, false, "Error compiling shader!"); //check for compile error
+
+	return shader;
 }
