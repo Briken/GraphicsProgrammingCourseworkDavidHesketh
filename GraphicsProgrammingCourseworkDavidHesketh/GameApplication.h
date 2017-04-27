@@ -4,7 +4,9 @@
 #include <GL/glew.h>
 #include "Screen.h"
 #include "Mesh.h"
-//#include "Shader.h"
+#include "Shader.h"
+#include "Texture.h"
+#include "Transform.h"
 
 enum class GameState { PLAY, EXIT };
 
@@ -25,5 +27,11 @@ private:
 
 	Screen m_GameDisplay;
 	GameState m_GameState;
+
+	Mesh object1;
+	Mesh object2;
+	Camera gameCamera;
+
+	float counter;
 };
 

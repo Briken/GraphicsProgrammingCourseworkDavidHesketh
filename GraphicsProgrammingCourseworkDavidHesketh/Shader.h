@@ -1,6 +1,8 @@
 #pragma once
 #include <string>
 #include <GL\glew.h>
+#include "Transform.h"
+#include "Camera.h"
 
 class Shader
 {
@@ -17,12 +19,21 @@ public:
 	~Shader();
 protected:
 private:
-	static const int NUM_SHADERS = 2;
+	/*static const int NUM_SHADERS = 2;
 	Shader(const Shader& other) {}
-	void operator= (const Shader& other) {}
+	void operator= (const Shader& other) {}*/
+	static const unsigned int NUM_SHADERS = 2; // number of shaders
+
+	enum
+	{
+		TRANSFORM_U,
+
+		NUM_UNIFORMS
+	};
 
 	GLuint m_Program;
 	GLuint m_Shaders[NUM_SHADERS];
+	GLuint m_Uniforms[NUM_UNIFORMS];
 
 };
 

@@ -1,11 +1,17 @@
 #include "stdafx.h"
 #include "GameApplication.h"
+#include "Camera.h"
+#include <iostream>
+#include <string>
 
+Transform objectTransform;
 
 GameApplication::GameApplication()
 {
 	m_GameState = GameState::PLAY;
 	Screen* m_GameDisplay = new Screen();
+	Mesh* object1();
+	Mesh* object2();
 }
 
 
@@ -52,23 +58,24 @@ void GameApplication::DrawGame()
 {
 	m_GameDisplay.ClearDisplay();
 
-	Vertex vertArray[] = {
-		Vertex(glm::vec3(-0.5f,-0.5f,-0)),
-		Vertex(glm::vec3(0,-0.5f,0)),
-		Vertex(glm::vec3(0.5, -0.5f, 0))
-	};
-	Mesh objMesh(vertArray, sizeof(vertArray) / sizeof(vertArray[0]));
+	
+	
 	Shader shader("res/shaders/shader");
-	shader.Bind();
-	objMesh.Draw();
+	Texture texture("C:\\Users\\broke\\Downloads\\Lab4\\Lab4\\res\\bricks.jpg"); //load texture
+	Texture texture1("C:\\Users\\broke\\Downloads\\Lab4\\Lab4\\res\\water.jpg"); //load texture
+	
+	
+	objectTransform.SetPos(glm::vec3(sinf(counter), 0.0, 0.0));
+	objectTransform.SetRot(glm::vec3(0.0, 0.0, counter * 5));
+	objectTransform.SetScale(glm::vec3(sinf(counter), sinf(counter), sinf(counter)));
 
-	// old code for testing only 
+	shader.Bind();
+	shader.Update(objectTransform, gameCamera);
+	texture.Bind(0);
+	object2.Draw();
+	counter += 0.01f;
+
 	glEnableClientState(GL_COLOR_ARRAY);
-	glBegin(GL_TRIANGLES);
-	glColor3f(1.0f, 0.0f, 0.0f);
-	glVertex2f(0, 0);
-	glVertex2f(0, 500);
-	glVertex2f(500, 500);
 	glEnd();
 
 	m_GameDisplay.SwapBuffer();
