@@ -72,7 +72,6 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <IncludePath>$(SolutionDir)deps/include/;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)deps/lib/;$(VC_LibraryPath_x86);$(WindowsSDK_LibraryPath_x86);$(NETFXKitsDir)Lib\um\x86</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -85,10 +84,10 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
@@ -149,10 +148,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\Downloads\stb_image\stb_image.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="GameApplication.h" />
-    <ClInclude Include="Mesh.h" />
     <ClInclude Include="ModelLoader.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Shader.h" />
@@ -163,11 +160,10 @@
     <ClInclude Include="Window.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\Downloads\stb_image\stb_image.c" />
+    <ClCompile Include="Camera.cpp" />
     <ClCompile Include="GameApplication.cpp" />
     <ClCompile Include="GraphicsProgrammingCourseworkDavidHesketh.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="ModelLoader.cpp" />
     <ClCompile Include="Screen.cpp" />
     <ClCompile Include="Shader.cpp" />
@@ -178,6 +174,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Texture.cpp" />
+    <ClCompile Include="Transform.cpp" />
     <ClCompile Include="Window.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
