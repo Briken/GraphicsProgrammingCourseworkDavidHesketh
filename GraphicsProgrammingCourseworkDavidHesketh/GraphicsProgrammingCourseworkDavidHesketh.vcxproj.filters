@@ -86,7 +86,7 @@
     <ClCompile Include="Mesh.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="stb_image.c">
+    <ClCompile Include="..\..\..\..\Downloads\stb_image\stb_image.c">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

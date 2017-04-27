@@ -1,7 +1,6 @@
 #ifndef  MODEL_LOADER_H_INCLUDED
 #define MODEL_LOADER_H_INCLUDED
 #include <glm/glm.hpp>
-//#include <glm>
 #include <vector>
 #include <string>
 
