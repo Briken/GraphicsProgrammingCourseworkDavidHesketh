@@ -1,4 +1,3 @@
-#include "stdafx.h"
 #include "Shader.h"
 #include <iostream>
 #include <fstream>
@@ -20,7 +19,7 @@ Shader::Shader(const std::string& filename)
 	glValidateProgram(m_Program);
 	CheckShaderError(m_Program, GL_VALIDATE_STATUS, true, "Error: shader program not valid");
 
-	m_Uniforms[TRANSFORM_U] = glGetUniformLocation(m_Program, "transform");
+	uniforms[TRANSFORM_U] = glGetUniformLocation(program, "transform");
 }
 void Shader::Bind()
 {
@@ -31,7 +30,7 @@ void Shader::Bind()
 std::string Shader::LoadShader(const std::string & fileName)
 {
 	std::ifstream shaderFile;
-	shaderFile.open((fileName).c_str());
+	shaderFile.open((fileName).c_str);
 	std::string output;
 	std::string line;
 
@@ -70,6 +69,11 @@ void Shader::CheckShaderError(GLuint shader, GLuint flag, bool isProgram, const 
 	}
 }
 
+GLuint Shader::CreateShader(const std::string & text, unsigned int type)
+{
+	return GLuint();
+}
+
 
 Shader::~Shader()
 {
@@ -84,7 +88,7 @@ Shader::~Shader()
 void Shader::Update(const Transform& transform, const Camera& camera)
 {
 	glm::mat4 mvp = camera.GetViewProjection() * transform.GetModel();
-	glUniformMatrix4fv(m_Uniforms[TRANSFORM_U], 1, GLU_FALSE, &mvp[0][0]);
+	glUniformMatrix4fv(uniforms[TRANSFORM_U], 1, GLU_FALSE, &mvp[0][0]);
 }
 
 GLuint Shader::CreateShader(const std::string& text, unsigned int type)

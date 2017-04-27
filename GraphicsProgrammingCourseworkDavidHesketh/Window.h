@@ -1,5 +1,4 @@
 #pragma once
-#include "stdafx.h"
 #include <SDL\SDL.h>
 #include <GL\glew.h>
 #include <iostream>
